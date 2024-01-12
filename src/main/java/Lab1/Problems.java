@@ -167,6 +167,68 @@ public class Problems {
         }
     }
 
+    public class Problem6Node {
+      int val;
+      Problem6Node next;
+      Problem6Node() {}
+      Problem6Node(int val) { this.val = val; }
+      Problem6Node(int val, Problem6Node next) { this.val = val; this.next = next; }
+
+        // method to print to string for test cases:
+        public String printList() {
+            return val + (next != null ? "->" + next.printList() : "");
+        }
+  }
+
+    public Problem6Node problem6(Problem6Node list1, Problem6Node list2) {
+        if(list1!=null && list2!=null)
+        {
+            if(list1.val < list2.val)
+            {
+                list1.next =  problem6(list1.next,list2);
+                return list1;
+            }
+            else if(list1.val >= list2.val)
+            {
+                list2.next = problem6(list1,list2.next);
+                return list2;
+            }
+        }
+        if(list1 == null){
+            return list2;
+        }else{
+            return list1;
+
+        }
+
+    }
+
+    public int[] problem7(int[] digits) {
+        int nonNineIndex = digits.length - 1;
+        while (nonNineIndex >= 0 && digits[nonNineIndex] == 9) {
+            nonNineIndex--;
+        }
+
+
+        if (nonNineIndex == -1) {
+
+            int[] result = new int[digits.length + 1];
+            result[0] = 1;
+            return result;
+        } else {
+            int[] result = new int[digits.length];
+
+            for (int i = 0; i < nonNineIndex; i++) {
+                result[i] = digits[i];
+            }
+
+            result[nonNineIndex] = digits[nonNineIndex] + 1;
+
+            return result;
+        }
+    }
+
+
 
 
 }
